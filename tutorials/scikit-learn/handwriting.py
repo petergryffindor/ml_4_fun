@@ -1,5 +1,3 @@
-print(__doc__)
-
 # Author: Gael Varoquaux <gael dot varoquaux at normalesup dot org>
 # License: BSD 3 clause
 
@@ -29,7 +27,7 @@ for ax, (image, label) in zip(axes[0, :], images_and_labels[:4]):
 # To apply a classifier on this data, we need to flatten the image, to
 # turn the data in a (samples, feature) matrix:
 n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
+data = digits.images.reshape(n_samples, -1)
 
 # Create a classifier: a support vector classifier
 classifier = svm.SVC(gamma=0.001)
