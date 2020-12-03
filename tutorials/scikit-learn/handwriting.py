@@ -34,7 +34,7 @@ classifier = svm.SVC(gamma=0.001)
 
 # Split data into train and test subsets
 X_train, X_test, y_train, y_test = train_test_split(
-    data, digits.target, test_size=0.5, shuffle=False)
+    data, digits.target, test_size=0.1, shuffle=True)
 
 # We learn the digits on the first half of the digits
 classifier.fit(X_train, y_train)
@@ -42,7 +42,13 @@ classifier.fit(X_train, y_train)
 # Now predict the value of the digit on the second half:
 predicted = classifier.predict(X_test)
 
-images_and_predictions = list(zip(digits.images[n_samples // 2:], predicted))
+# get reshaped images back from X_test samples
+X_test_images = X_test.reshape(len(X_test),8,8)
+
+# output train and test sample sizes
+print("Training size: " + str(len(y_train)) + ". Test size : " + str(len(y_test)) + ".")
+
+images_and_predictions = list(zip(X_test_images, predicted))
 for ax, (image, prediction) in zip(axes[1, :], images_and_predictions[:4]):
     ax.set_axis_off()
     ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
